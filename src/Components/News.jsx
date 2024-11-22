@@ -3,6 +3,12 @@ import Weather from './Weather'
 import Calendar from './Calendar'
 import './News.css'
 import userImg from '../assets/user.jpg'
+import techImg from '../assets/tech.jpg'
+import sportsImg from '../assets/sports.jpg'
+import scienceImg from '../assets/science.jpg'
+import worldImg from '../assets/world.jpg'
+import healthImg from '../assets/health.jpg'
+import nationImg from '../assets/nation.jpg'
 
 
 const News = () => {
@@ -48,8 +54,57 @@ const News = () => {
         </div>
         
         <div className="news-section">
-          <div className="headline">Headline</div>
-          <div className="news-grid">News Grid</div>
+          <div className="headline">
+            <img src={techImg} alt="Headline Image" />
+            <h2 className='headline-title'>Lorem ipsum dolor sit amet 
+              consectetur adipisicing elit. Ipsam, adipisci.
+              <i className='fa-regular fa-bookmark bookmark'></i>
+            </h2>
+          </div>
+          <div className="news-grid">
+            <div className="news-grid-item">
+              <img src={techImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+            <div className="news-grid-item">
+              <img src={sportsImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+            <div className="news-grid-item">
+              <img src={scienceImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+            <div className="news-grid-item">
+              <img src={worldImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+            <div className="news-grid-item">
+              <img src={healthImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+            <div className="news-grid-item">
+              <img src={nationImg} alt="News Image" />
+              <h3>
+                Lorem ipsum dolor sit amet.
+                <i className='fa-regular fa-bookmark bookmark'></i>
+              </h3>
+            </div>
+          </div>
         </div>
         
         <div className="my-blogs">My Blogs</div>
