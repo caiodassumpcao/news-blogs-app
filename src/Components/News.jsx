@@ -5,6 +5,7 @@ import './News.css'
 import userImg from '../assets/perfil.jpg'
 import noImg from '../assets/no-img.png'
 import axios from 'axios'
+import NewsModal from './NewsModal'
 
 const categories = [
   "general", 
@@ -127,6 +128,7 @@ const News = () => {
             ))}
           </div>
         </div>
+        <NewsModal />
         <div className="my-blogs">My Blogs</div>
         <div className="weather-calendar">
           <Weather />
