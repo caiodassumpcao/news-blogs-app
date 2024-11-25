@@ -6,7 +6,7 @@ const Weather = () => {
     <div className="search">
       <div className="search-top">
         <i className="fa-solid fa-location-dot"></i>
-        <div className="location">Tbilisi</div>
+        <div className="location">Recife</div>
       </div>
       <div className="search-location">
         <input type="text" placeholder='Enter Location' />
