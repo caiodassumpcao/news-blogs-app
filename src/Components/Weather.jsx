@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-import './Weather.css'
+import axios from 'axios';
+import './Weather.css';
 
 const Weather = () => {
   const [data, setData] = useState({});
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('');
 
   useEffect(() => {
     const fetchDefaultLocation = async () => {
-      const fetchDefaultLocation = "Recife"
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLOcation}&units=Metric&appid=b7ded43a895f88f3d4f7d8411caa2d03`
-
-      const response = await axios.get(url)
-      setData(response.data)
-    }
-    fetchDefaultLocation()
-  })
+      const defaultLocation = "Recife";
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=Metric&appid=b7ded43a895f88f3d4f7d8411caa2d03`;
+  
+      try {
+        const response = await axios.get(url);
+        setData(response.data); 
+      } catch (error) {
+        console.error("Error fetching default location data", error);
+      }
+    };
+    fetchDefaultLocation();
+  }, []); 
 
   const search = async () => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=Metric&appid=b7ded43a895f88f3d4f7d8411caa2d03`
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=Metric&appid=b7ded43a895f88f3d4f7d8411caa2d03`;
 
     try {
       const response = await axios.get(url);
@@ -37,39 +41,38 @@ const Weather = () => {
       }
     }
 
-
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   const handleInputChange = (e) => {
-    setLocation(e.target.value)
-  }
+    setLocation(e.target.value);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      search()
+      search();
     }
-  }
+  };
 
   const getWeatherIcon = (weatherType) => {
     switch (weatherType) {
       case "Clear":
-        return <i className='bx bxs-sun'></i>
+        return <i className='bx bxs-sun'></i>;
       case "Clouds":
-        return <i className='bx bxs-cloud'></i>
+        return <i className='bx bxs-cloud'></i>;
       case "Rain":
-        return <i className='bx bxs-cloud-rain'></i>
-      case "Thumderstorm":
-        return <i className='bx bxs-cloud-lightning'></i>
+        return <i className='bx bxs-cloud-rain'></i>;
+      case "Thunderstorm":
+        return <i className='bx bxs-cloud-lightning'></i>;
       case "Snow":
-        return <i className='bx bxs-cloud-snow'></i>
+        return <i className='bx bxs-cloud-snow'></i>;
       case "Haze":
       case "Mist":
-        return <i className='bx bxs-cloud'></i>
+        return <i className='bx bxs-cloud'></i>;
       default:
-        return <i className='bx bxs-cloud'></i>
+        return <i className='bx bxs-cloud'></i>;
     }
-  }
+  };
 
   return (
     <div className='weather'>
@@ -79,7 +82,13 @@ const Weather = () => {
           <div className="location">{data.name}</div>
         </div>
         <div className="search-location">
-          <input type="text" placeholder='Enter Location' value={location} onChange={handleInputChange} onKeyDown={handleKeyDown}/>
+          <input
+            type="text"
+            placeholder='Enter Location'
+            value={location}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+          />
           <i className="fa-solid fa-magnifying-glass" onClick={search}></i>
         </div>
       </div>
@@ -92,9 +101,8 @@ const Weather = () => {
           <div className="temp">{data.main ? `${Math.floor(data.main.temp)}°` : null}</div>
         </div>
       )}
-
     </div>
-  )
-}
+  );
+};
 
-export default Weather
+export default Weather;
