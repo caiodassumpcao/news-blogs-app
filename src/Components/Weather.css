@@ -46,14 +46,20 @@
     color: #ddd;
 }
 
+.search-location {
+    position: relative; 
+}
+
 .search-location i {
     position: absolute;
     top: 50%;
-    transform: rotateY(-50%);
     right: 1rem;
+    transform: translateY(-50%); 
     font-size: 1.8rem;
     color: #fff;
+    cursor: pointer; 
 }
+
 
 .weather-data {
     display: flex;
@@ -70,9 +76,32 @@
     color: #ffc87c;
 
 }
+.weather-data i.bxs-cloud {
+    color: #fff;
+
+}
+.weather-data i.bxs-cloud-rain {
+    color: #5fd1f9;
+
+}
+.weather-data i.bxs-cloud-lightning {
+    color: #154abd;
+
+}
+.weather-data i.bxs-cloud-snow {
+    color: #52e5e7;
+
+}
 
 .weather-type, .temp {
     font-family: 'Comfortaa', sans-serif;
     font-size: 2rem;
     color: #ddd;
+}
+
+.not-found {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 1.6rem;
+    color: #ddd;
+    margin-bottom: 12rem;
 }
