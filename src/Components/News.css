@@ -257,7 +257,7 @@
     padding: 1.2rem;
 }
 .blog-post {
-    flex: 0 1 calc(50% - 01.6rem);
+    flex: 0 1 calc(50% - 1.6rem);
     border-radius: 1rem;
     position: relative;
 }
@@ -287,6 +287,9 @@
     overflow-wrap: break-word;
 }
 
+.blog-post p {
+    color: transparent;
+}
 .post-buttons {
     position: absolute;
     top: 1rem;
