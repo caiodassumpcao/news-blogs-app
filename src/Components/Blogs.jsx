@@ -23,13 +23,15 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     }
 
     const handleTitleChange = (e) => {
-        const value = e.target.value
+        const value = e.target.value;
+        setTitle(value);
         if (value.length <= 60) { 
-            setTitleValid(true) 
+            setTitleValid(true); 
         } else {
-            setTitleValid(false) 
+            setTitleValid(false); 
         }
-    }
+    };
+    
 
     const handleContentChange = (e) => {
         setContent(e.target.value)
