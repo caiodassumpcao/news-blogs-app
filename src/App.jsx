@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import News from './Components/News'
 import Blogs from './Components/Blogs'
 
@@ -7,14 +7,25 @@ const App = () => {
   const[showBlogs, setShowBlogs] = useState(false)
   const [blogs, setBlogs] = useState([])
 
+  useEffect(() => {
+    const savedBlogs = JSON.parse(localStorage.getItem('blogs')) || []
+    setBlogs(savedBlogs)
+  }, [])
+
   const handlerCreateBlog = (newBlog) => {
-    setBlogs((prevBlogs) => [...prevBlogs, newBlog])
+    setBlogs((prevBlogs) => {
+      const updateBlogs = [...prevBlogs, newBlog] 
+      localStorage.setItem("blogs", JSON.stringify(updateBlogs))
+      return updateBlogs
+    })
   }
 
   const handleShowBlogs = () => {
     setShowNews(false)
     setShowBlogs(true)
   }
+
+  
 
   const handleBackToNews = () => {
     setShowNews(true)

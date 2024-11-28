@@ -25,7 +25,6 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     const handleTitleChange = (e) => {
         const value = e.target.value
         if (value.length <= 60) { 
-            setTitle(value) 
             setTitleValid(true) 
         } else {
             setTitleValid(false) 
