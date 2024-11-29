@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import userImg from '../assets/perfil.jpg'
 import noImg from '../assets/no-img.png'
 import './Blogs.css'
 
-const Blogs = ({ onBack, onCreateBlog }) => {
+const Blogs = ({ onBack, onCreateBlog, editPost, onEditBlog, isEditing }) => {
     const [showForm, setShowForm] = useState(false)
     const [image, setImage] = useState(null)
     const [title, setTitle] = useState('')
@@ -12,26 +12,49 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     const [titleValid, setTitleValid] = useState(true)
     const [contentValid, setContentValid] = useState(true)
 
+    useEffect(() => {
+        if (isEditing && editPost) {
+            setImage(editPost.image);
+            setTitle(editPost.title);
+            setContent(editPost.content);
+            setShowForm(true);
+        } else {
+            setImage(null);
+            setTitle("");
+            setContent("");
+            setShowForm(false);
+        }
+    }, [isEditing, editPost]);
+    
     const handleImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0]
+
+            const maxSize = 1 * 1024 * 1014
+
+            if (file.size > maxSize) {
+                alert("File size esceds 1 MB")
+                return
+            }
+
             const reader = new FileReader()
             reader.onloadend = () => {
                 setImage(reader.result)
             }
-            reader.readAsDataURL(e.target.files[0])
+            reader.readAsDataURL(file)
         }
     }
 
     const handleTitleChange = (e) => {
         const value = e.target.value;
         setTitle(value);
-        if (value.length <= 60) { 
-            setTitleValid(true); 
+        if (value.length <= 60) {
+            setTitleValid(true);
         } else {
-            setTitleValid(false); 
+            setTitleValid(false);
         }
     };
-    
+
 
     const handleContentChange = (e) => {
         setContent(e.target.value)
@@ -41,10 +64,10 @@ const Blogs = ({ onBack, onCreateBlog }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(!title || !content) {
-            if(!title) setTitleValid(false)
-            if(!content) setContentValid(false)
-            return 
+        if (!title || !content) {
+            if (!title) setTitleValid(false)
+            if (!content) setContentValid(false)
+            return
         }
 
         const newBlog = {
@@ -52,7 +75,7 @@ const Blogs = ({ onBack, onCreateBlog }) => {
             title,
             content,
         }
-        onCreateBlog(newBlog)
+        onCreateBlog(newBlog, isEditing)
         setImage(null)
         setTitle("")
         setContent("")
@@ -77,7 +100,7 @@ const Blogs = ({ onBack, onCreateBlog }) => {
                 )}
                 {submitted && <p className='submission-message'>Post Submitted!</p>}
                 <div className={`blogs-right-form ${showForm ? 'visible' : 'hidden'}`}>
-                    <h1>New Post</h1>
+                    <h1>{isEditing ? "Edit post" : "New Post"}</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="img-upload">
                             <label htmlFor="file-upload" className="file-upload">
@@ -89,7 +112,7 @@ const Blogs = ({ onBack, onCreateBlog }) => {
 
                         <input type="text" placeholder='Add Title (max 60 Characters)' className={`title-input ${!titleValid ? 'invalid' : ''}`} value={title} onChange={handleTitleChange} />
                         <textarea className={`title-input ${!contentValid ? 'invalid' : ''}`} placeholder='Add Text' value={content} onChange={(e) => setContent(e.target.value)}></textarea>
-                        <button type='submit' className='submit-btn'>Submit Button</button>
+                        <button type='submit' className='submit-btn'>{isEditing ? "Update Post" : "Submite Post"}</button>
                     </form>
                 </div>
                 <button className="blogs-close-btn" onClick={onBack}>
